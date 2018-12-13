@@ -14,17 +14,24 @@
 <template>
     <div class="layout">
         <Sider :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto'}">
-            <Menu active-name="" theme="dark" width="auto" :open-names="['activePath']" @on-select="routeTo">
-                <Submenu :name="item.path" 
+            <Menu 
+                :active-name="$route.fullPath" 
+                theme="dark" width="auto" 
+                :open-names="[$route.matched[0].path]" 
+                @on-select="routeTo"
+            >
+                <Submenu 
+                    :name="item.path" 
                     v-for="(item,index) in submenu" 
-                    :key="index">
+                    :key="index"
+                >
                     <template slot="title">
                        {{item.meta}}
                     </template>
                     <MenuItem 
-                        v-for="(menu,index) in item.children" 
-                        :key="index"
-                        :name="`${item.path}${menu.path}`"
+                        v-for="(menu,ind) in item.children" 
+                        :key="ind"
+                        :name="`${item.path}/${menu.path}`"
                        >
                        {{menu.meta}}
                     </MenuItem>
@@ -39,7 +46,7 @@
     import RouterConfig from '@/config'
     export default {
         created(){
-            console.log(RouterConfig)
+            console.log(this.$route)
         },
         mounted() {
             this.activePath = this.$route.path // 获取到的是路由

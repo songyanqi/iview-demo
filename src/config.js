@@ -1,6 +1,6 @@
 export default [
     {
-        path :'/home/',
+        path :'/home',
         meta:'首页',
         component: () => import(/* webpackChunkName: "home" */ '@/views/Index'),
         children : [
@@ -12,7 +12,7 @@ export default [
         ],
     },
     {
-        path :'/about/',
+        path :'/about',
         meta:'关于',
         component: () => import(/* webpackChunkName: "about" */ '@/views/Index'),
         children : [
