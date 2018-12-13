@@ -1,5 +1,26 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <Layout :style="{marginLeft: '200px'}">
+        <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}"></Header>
+        <Content :style="{padding: '0 16px 16px'}">
+            <!-- 全局组件 -->
+            <header-menu :items ='headerList'></header-menu>
+            <Card>
+                Content
+            </Card>
+        </Content>
+    </Layout>
 </template>
+<script>
+  export default {
+      data(){
+        return {
+          headerList:[
+            {name:'Home'},
+            {name:'About'},
+            {name:'Mine'}
+          ],
+        }
+      }
+  }
+</script>
+
