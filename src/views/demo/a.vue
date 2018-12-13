@@ -5,7 +5,7 @@
             <!-- 全局组件 -->
             <header-menu :items ='headerList'></header-menu>
             <Card>
-                About
+                About12234
             </Card>
         </Content>
     </Layout>

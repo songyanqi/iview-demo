@@ -14,31 +14,20 @@
 <template>
     <div class="layout">
         <Sider :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto'}">
-            <Menu active-name="1-2" theme="dark" width="auto" :open-names="['1']">
-                <Submenu name="1">
+            <Menu active-name="" theme="dark" width="auto" :open-names="['activePath']" @on-select="routeTo">
+                <Submenu :name="item.path" 
+                    v-for="(item,index) in submenu" 
+                    :key="index">
                     <template slot="title">
-                        <Icon type="ios-navigate"></Icon>
-                        Item 1
+                       {{item.meta}}
                     </template>
-                    <MenuItem name="1-1">Option 1</MenuItem>
-                    <MenuItem name="1-2">Option 2</MenuItem>
-                    <MenuItem name="1-3">Option 3</MenuItem>
-                </Submenu>
-                <Submenu name="2">
-                    <template slot="title">
-                        <Icon type="ios-keypad"></Icon>
-                        Item 2
-                    </template>
-                    <MenuItem name="2-1">Option 1</MenuItem>
-                    <MenuItem name="2-2">Option 2</MenuItem>
-                </Submenu>
-                <Submenu name="3">
-                    <template slot="title">
-                        <Icon type="ios-analytics"></Icon>
-                        Item 3
-                    </template>
-                    <MenuItem name="3-1">Option 1</MenuItem>
-                    <MenuItem name="3-2">Option 2</MenuItem>
+                    <MenuItem 
+                        v-for="(menu,index) in item.children" 
+                        :key="index"
+                        :name="`${item.path}${menu.path}`"
+                       >
+                       {{menu.meta}}
+                    </MenuItem>
                 </Submenu>
             </Menu>
         </Sider>
@@ -47,7 +36,25 @@
     </div>
 </template>
 <script>
+    import RouterConfig from '@/config'
     export default {
-        
+        created(){
+            console.log(RouterConfig)
+        },
+        mounted() {
+            this.activePath = this.$route.path // 获取到的是路由
+        },
+        data(){
+            return {
+                activePath : this.$route.path,
+                submenu:RouterConfig
+            }
+        },
+        methods:{
+            routeTo(e) {
+                console.log(e,'e')
+                this.$router.push(e);
+            }  
+        }
     }
 </script>

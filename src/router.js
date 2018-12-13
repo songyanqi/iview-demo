@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import RouterConfig from '@/config'
 
+console.log(RouterConfig,...RouterConfig)
 Vue.use(Router)
 
 export default new Router({
@@ -8,14 +10,13 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: () => import(/* webpackChunkName: "home" */ './views/Home.vue')
+      path : '/',
+      component: () => import(/* webpackChunkName: "home" */ './views/Index.vue')
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
+      path : '*',
+      redirect : '/',
+    },
+    ...RouterConfig
   ]
 })
