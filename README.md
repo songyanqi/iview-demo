@@ -52,4 +52,7 @@ routes: [
     },
     ...RouterConfig
   ]
-```
+
+
+###代码提交到自己的仓库 readme.md 冲突 拉取不到的时候 执行
+git pull origin master --allow-unrelated-histories
