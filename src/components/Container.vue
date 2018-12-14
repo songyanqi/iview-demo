@@ -4,7 +4,8 @@
         background: #f5f7f9;
         position: relative;
         border-radius: 4px;
-        overflow: hidden;
+        height: 100%;
+        /* overflow: hidden; */
     }
     .layout-header-bar{
         background: #fff;
@@ -59,7 +60,6 @@
         },
         methods:{
             routeTo(e) {
-                console.log(e,'e')
                 this.$router.push(e);
             }  
         }
