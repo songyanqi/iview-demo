@@ -139,6 +139,9 @@
                     content: `Name：${this.data1[index].name}<br>Age：${this.data1[index].age}<br>Address：${this.data1[index].address}`
                 })
             },
+            remove(index) {
+                this.data1.splice(index, 1);
+            }
             // sequenceDisplay(x,y,z){
             //     var targetObj = {
             //         "concern": '关注',

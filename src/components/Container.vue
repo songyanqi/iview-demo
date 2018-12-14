@@ -46,7 +46,7 @@
 </template>
 <script>
     import RouterConfig from '@/config'
-    export default {
+    export default { 
         created(){
             // console.log(this.$route)
         },
