@@ -1,14 +1,11 @@
-import Vue from 'vue'
-
 export default {
     install(Vue , options){
 
         let ts = Vue.prototype
 
         // 时间戳转换  window 方法
-        ts.dataFormat = function(stemp , fmt ) { 
+        ts.dataFormat = (stemp , fmt )=> { 
             let that = new Date( stemp )
-            console.log(that)
             let o = {  
                 "M+" : that.getMonth()+1,                 //月份  
                 "d+" : that.getDate(),                    //日  
@@ -23,8 +20,6 @@ export default {
             for(var k in o)  
                 if(new RegExp("("+ k +")").test(fmt))  
                     fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));  
-
-                    console.log(fmt)
             return fmt;  
         }
 

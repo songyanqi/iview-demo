@@ -15,7 +15,8 @@
 <template>
     <div class="layout">
         <Sider :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto'}">
-            <Menu 
+            <Menu
+                v-if="$route.matched[0]" 
                 :active-name="$route.fullPath" 
                 theme="dark" width="auto" 
                 :open-names="[$route.matched[0].path]" 
@@ -47,7 +48,7 @@
     import RouterConfig from '@/config'
     export default {
         created(){
-            console.log(this.$route)
+            // console.log(this.$route)
         },
         mounted() {
             this.activePath = this.$route.path // 获取到的是路由

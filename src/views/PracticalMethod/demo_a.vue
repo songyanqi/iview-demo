@@ -5,18 +5,17 @@
             <!-- 全局组件 -->
             <header-menu :items ='headerList'></header-menu>
             <Card>
-              <Table border :row-class-name="rowClassName" :columns="columns1" :data="data1"></Table>
+              <Table border :columns="columns1" :data="data1"></Table>
             </Card>
         </Content>
     </Layout>
 </template>
 <script>
   export default {
-        created(){
+        created() {
             this.data1 = this.list;
-            // this.initFormatter()
         },
-        data(){
+        data() {
             return {
                 headerList:[
                     {name:'实用方法'},
@@ -39,7 +38,7 @@
                         title: 'Date',
                         key: 'date',
                         render: (h, params) => {
-                            console.log(this)
+                            console.log(h,params)
                         return h(
                                 'div', 
                                 this.dataFormat(params.row.date , 'yyyy-MM-dd')
@@ -52,7 +51,6 @@
                         width: 250,
                         align: 'center',
                         render: (h, params) => {
-                            console.log(h,params)
                             return h('div', [
                                 h('Button', {
                                     props: {
@@ -129,34 +127,30 @@
                 原因：受 ES5 的限制，Vue.js 不能检测到对象属性的添加或删除。
                 因为 Vue.js 在初始化实例时将属性转为 getter/setter，所以属性必须在 data 对象上才能让 Vue.js 转换它，才能让它是响应的。
             */
-            handleSave(row){
+            handleSave(row) {
                 this.$set(row,'$isEdit',false)
             },
-            handleEdit(row){
+            handleEdit(row) {
                 this.$set(row,'$isEdit',true)
             },
             show(index) {
-                console.log(index,'index')
                 this.$Modal.info({
                     title: 'User Info',
                     content: `Name：${this.data1[index].name}<br>Age：${this.data1[index].age}<br>Address：${this.data1[index].address}`
                 })
             },
-            rowClassName(row,index){
-                // console.log(row,index)
-            },
-            sequenceDisplay(x,y,z){
-                var targetObj = {
-                    "concern": '关注',
-                    "square": '广场',
-                    "brightest": '最亮',
-                }
-                var newArr = [];
-                z.forEach(item => {
-                    newArr.push(targetObj[item]);
-                })
-                return newArr.toString()
-            },
+            // sequenceDisplay(x,y,z){
+            //     var targetObj = {
+            //         "concern": '关注',
+            //         "square": '广场',
+            //         "brightest": '最亮',
+            //     }
+            //     var newArr = [];
+            //     z.forEach(item => {
+            //         newArr.push(targetObj[item]);
+            //     })
+            //     return newArr.toString()
+            // },
         }
   }
 </script>
