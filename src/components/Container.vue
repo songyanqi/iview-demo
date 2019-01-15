@@ -50,6 +50,13 @@
         created(){
             // console.log(this.$route)
         },
+        watch:{
+            '$route'(to,from){
+                console.log(to)
+                console.log(from)
+                console.log(this.$route.path,this.$route.params)
+            }
+        },
         mounted() {
             this.activePath = this.$route.path // 获取到的是路由
         },
@@ -61,6 +68,7 @@
         },
         methods:{
             routeTo(e) {
+                
                 this.$router.push(e);
             }  
         }

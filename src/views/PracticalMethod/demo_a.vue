@@ -12,6 +12,11 @@
 </template>
 <script>
   export default {
+      // 返回数组字符串 转化成 文字
+      // 去掉文案中包含的空格
+      // 时间戳转换
+      // $set
+
         created() {
             this.data1 = this.list;
         },
@@ -31,17 +36,33 @@
                         key: 'age'
                     },
                     {
+                        title: '显示位置',
+                        key: 'location',
+                        render:(h,params) =>{
+                            return h(
+                                'div',
+                                this.sequenceDisplay(params.row.location)
+                            )
+                        }
+                    },
+                    {
                         title: 'Address',
-                        key: 'address'
+                        key: 'address',
+                        render:(h,params) =>{
+                            return h (
+                                'div',
+                                this.delHtmlTag(params.row.address)
+                                
+                            )
+                        }
                     },
                     {
                         title: 'Date',
                         key: 'date',
                         render: (h, params) => {
-                            console.log(h,params)
-                        return h(
+                            return h(
                                 'div', 
-                                this.dataFormat(params.row.date , 'yyyy-MM-dd')
+                                this.format(params.row.date , 'qq-yyyy-MM-dd hh:mm:ss')
                             );/*这里的this.row能够获取当前行的数据*/
                         }
                     },
@@ -100,20 +121,21 @@
                     }
                 ],
                 data1:[],
+                //数据
                 list: [
                     {
                         name: 'John Brown',
                         age: 18,
-                        address: 'New York No. 1 Lake Park',
+                        address: '      北京市 朝阳区  第三置业大厦A座··· ',
                         date: 1544705478000,
-                        $isEdit:false,
+                        location: ["concern", "square", "brightest"]
                     },
                     {
                         name: 'Jim Green',
                         age: 24,
                         address: 'London No. 1 Lake Park',
                         date: 1544775038000,
-                        $isEdit:false,
+                        location: ["square", "brightest"]
                     }
                     
                 ]
@@ -128,9 +150,11 @@
                 因为 Vue.js 在初始化实例时将属性转为 getter/setter，所以属性必须在 data 对象上才能让 Vue.js 转换它，才能让它是响应的。
             */
             handleSave(row) {
+                console.log(row,'保存');
                 this.$set(row,'$isEdit',false)
             },
             handleEdit(row) {
+                console.log(row,'编辑')
                 this.$set(row,'$isEdit',true)
             },
             show(index) {
@@ -141,19 +165,21 @@
             },
             remove(index) {
                 this.data1.splice(index, 1);
-            }
-            // sequenceDisplay(x,y,z){
-            //     var targetObj = {
-            //         "concern": '关注',
-            //         "square": '广场',
-            //         "brightest": '最亮',
-            //     }
-            //     var newArr = [];
-            //     z.forEach(item => {
-            //         newArr.push(targetObj[item]);
-            //     })
-            //     return newArr.toString()
-            // },
+            },
+
+            // 数组对应 文案方法
+            sequenceDisplay(z){
+                var targetObj = {
+                    "concern": '关注',
+                    "square": '广场',
+                    "brightest": '最亮',
+                }
+                var newArr = [];
+                z.forEach(item => {
+                    newArr.push(targetObj[item]);
+                })
+                return newArr.toString()
+            },
         }
   }
 </script>

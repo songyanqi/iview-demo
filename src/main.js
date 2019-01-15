@@ -7,12 +7,11 @@ import plugins from './plugins/common'
 import 'iview/dist/styles/iview.css'
 // import './my-theme/index.less';
 
-
+// 全局方法
 import HeaderMenu from '@/components/HeaderMenu'
-
 Vue.component('HeaderMenu' , HeaderMenu)
-
 Vue.use(HeaderMenu)
+
 Vue.use(iview)
 Vue.use(plugins)
 Vue.config.productionTip = false
