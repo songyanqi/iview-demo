@@ -27,6 +27,46 @@ export default {
             return format;  
         }
 
+        /** 
+         * 时间转化分钟数
+         * Demo: this.timeFormat(t)
+        */
+        ts.timeFormat = (t) => {
+            let time = Math.ceil(t);
+            if (time < 60) {
+                if (time < 10) {
+                    time = '0' + parseInt(t)
+                }
+                return '00:' + time
+            } else {
+                if (time < 3600) {
+                    let minutes = parseInt(time / 60)
+                    let seconds = time - minutes * 60
+                    if (minutes < 10) {
+                    minutes = '0' + minutes
+                    }
+                    if (seconds < 10) {
+                    seconds = '0' + seconds
+                    }
+                    return minutes + ':' + seconds
+                } else {
+                    let hours = parseInt(time / 3600)
+                    let minutes = parseInt((time - hours * 3600) / 60)
+                    let seconds = time - hours * 3600 - minutes * 60
+                    if (hours < 10) {
+                    hours = '0' + hours
+                    }
+                    if (minutes < 10) {
+                    minutes = '0' + minutes
+                    }
+                    if (seconds < 10) {
+                    seconds = '0' + seconds
+                    }
+                    return hours + ':' + minutes + ':' + seconds
+                }
+            }
+        }
+
         /**
          *  去掉内容的标记
          * @param str 内容字符串

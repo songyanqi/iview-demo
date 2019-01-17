@@ -13,6 +13,11 @@ export default [
                 path :'a2',
                 meta:'vue-浮动按钮组件',
                 component: () => import(/* webpackChunkName: "home" */ '@/views/demo/b'), 
+            },
+            {
+                path :'a3',
+                meta:'增删改查',
+                component: () => import(/* webpackChunkName: "home" */ '@/views/PracticalMethod/demo_b'), 
             }
         ],
     },
