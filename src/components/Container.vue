@@ -68,7 +68,6 @@
         },
         methods:{
             routeTo(e) {
-                
                 this.$router.push(e);
             }  
         }

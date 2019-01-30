@@ -18,6 +18,11 @@ export default [
                 path :'a3',
                 meta:'增删改查',
                 component: () => import(/* webpackChunkName: "home" */ '@/views/PracticalMethod/demo_b'), 
+            },
+            {
+                path :'a4',
+                meta:'复制文案',
+                component: () => import(/* webpackChunkName: "home" */ '@/views/PracticalMethod/copy_demo'), 
             }
         ],
     },
