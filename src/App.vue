@@ -1,15 +1,18 @@
 <template>
   <div id="app">
-    <AppContainer/>
-    
+    <div :is="$store.state.useComponent"></div>
   </div>
 </template>
 
 <script>
 export default {
-  components : {
-    AppContainer : () => import ('@/components/Container')
-  }
+    created(){
+    
+    },
+    components : {
+        AppContainer : () => import ('@/components/Container'),
+        Login : () => import('@/views/Login')
+    }
 }
 </script>
 

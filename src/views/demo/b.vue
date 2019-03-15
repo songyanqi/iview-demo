@@ -104,7 +104,7 @@
         }
     },
     data(){
-      return{
+      return {
         timer:null,
         currentTop:0,
         clientWidth:0,
