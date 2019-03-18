@@ -11,7 +11,7 @@ export default new Vuex.Store({
         increment (state) {
             // 变更状态
             state.useComponent = 'AppContainer'
-          }
+        }
     },
     actions: {
 

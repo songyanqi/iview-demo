@@ -45,7 +45,7 @@ export default [
         children : [
             {
                 path :'b',
-                meta:'2-1',
+                meta:'数据刷新',
                 component: () => import(/* webpackChunkName: "about" */ '@/views/demo1/b'), 
             }
         ],

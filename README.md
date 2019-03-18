@@ -85,6 +85,7 @@ chore:构建流程或辅助工具的变动
 
 ```JavaScript
 登录页
+node server  打开接口数据
 1、创建一个server.js  接口 :/login/user 数据 
 2、在vue.config.js 文件中设置 devServer
 3、使用 vuex  进行 传值 

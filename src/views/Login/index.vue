@@ -60,49 +60,57 @@ html,body {
 import axios from 'axios'
 
 export default {
-  data () {
-    return {
-      loginData: {
-      	acct:'',
-      	pass:''
-      },
-      ruleValidate: {
-      	acct: [
-            { required: true, message: '账号不能为空', trigger: 'blur' },
-            { min: 3, max: 16, message: '账号长度3-16个字符', trigger: 'blur' }
-        ],
-        pass: [
-            { required: true, message: '密码不能为空', trigger: 'blur' },
-            { type: 'string', min: 6, max: 16, message: '密码长度6-16个字符', trigger: 'blur' }
-        ]
-      }
-    }
-  },
-  methods: {
-    handleSubmit (name) {
-        this.$refs[name].validate((valid) => {
-            if (valid) {
-                axios({
-                    method : "get",
-                    url : "/login/user"
-                })
-                .then(ret => {
-                    if(ret.data.code == 0){
-                        this.$Message.success('登录成功!')
-                        this.$store.commit('increment')
-                        console.log(ret.data.code,this.$store.state)
-                    }else {
-                        this.$Message.error('表单验证失败!')
-                    }
-                })
-            } else {
-                this.$Message.error('表单验证失败!')
-            }
-        })
-    },
-    handleReset (name) {
-        this.$refs[name].resetFields();
-    }
-  }
+	data () {
+		return {
+			loginData: {
+				acct:'',
+				pass:''
+			},
+			ruleValidate: {
+				acct: [
+					{ required: true, message: '账号不能为空', trigger: 'blur' },
+					{ min: 3, max: 16, message: '账号长度3-16个字符', trigger: 'blur' }
+				],
+				pass: [
+					{ required: true, message: '密码不能为空', trigger: 'blur' },
+					{ type: 'string', min: 6, max: 16, message: '密码长度6-16个字符', trigger: 'blur' }
+				]
+			}
+		}
+	},
+  	created(){
+		if(sessionStorage.getItem('name')){
+			this.$store.commit('increment')
+		}else {
+			this.handleSubmit()
+		}
+  	},
+  	methods: {
+		handleSubmit (name) {
+			this.$refs[name].validate((valid) => {
+				if (valid) {
+					axios({
+						method : "get",
+						url : "/login/user"
+					})
+					.then(ret => {
+						if(ret.data.code == 0){
+							this.$Message.success('登录成功!')
+							sessionStorage.setItem('name',valid) // 设置缓存
+							this.$store.commit('increment')
+							console.log(ret.data.code,this.$store.state,valid)
+						}else {
+							this.$Message.error('表单验证失败!')
+						}
+					})
+				} else {
+					this.$Message.error('表单验证失败!')
+				}
+			})
+		},
+		handleReset (name) {
+			this.$refs[name].resetFields();
+		}
+	}
 }
 </script>
