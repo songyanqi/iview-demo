@@ -1,8 +1,6 @@
 <template>
   <Layout :style="{marginLeft: '200px'}">
-        <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}">
-            <i-button type="info">退出</i-button>
-        </Header>
+        <Head></Head>
         <Content :style="{padding: '0 16px 16px'}">
             <!-- 全局组件 -->
             <header-menu :items ='headerList'></header-menu>
@@ -26,42 +24,37 @@ import axios from 'axios'
         },
         data() {
             return {
+                loading:false,
                 headerList:[
                     {name:'关于'},
                     {name:'数据刷新'}
                 ],
                 columns1: [
                     {
-                        title: 'Name',
+                        title: '名字',
                         key: 'name'
                     },
                     {
-                        title: 'Age',
-                        key: 'age'
+                        title: 'id',
+                        key: 'id'
                     },
                     {
-                        title: 'Address',
+                        title: '内容',
                         key: 'address',
                         render:(h,params) =>{
                             return h (
                                 'div',
-                                this.delHtmlTag(params.row.address)
+                                this.delHtmlTag(params.row.content)
                                 
                             )
                         }
                     },
                     {
-                        title: 'Date',
-                        key: 'date',
-                        render: (h, params) => {
-                            return h(
-                                'div', 
-                                this.format(params.row.date , 'qq-yyyy-MM-dd hh:mm:ss')
-                            );/*这里的this.row能够获取当前行的数据*/
-                        }
+                        title: '创建时间',
+                        key: 'createdAt',
                     },
                     {
-                        title: 'Action',
+                        title: '操作',
                         key: 'action',
                         width: 250,
                         align: 'center',
@@ -70,47 +63,22 @@ import axios from 'axios'
                                 h('Button', {
                                     props: {
                                         type: 'primary',
-                                        size: 'small'
-                                    },
-                                    style: {
-                                        marginRight: '5px'
+                                        loading:this.loading,
+                                        shape:"circle"
                                     },
                                     on: {
                                         click: () => {
-                                            this.show(params.index)
-                                            console.log(params,'params.index')
+                                            if (params.row.loading) {
+                                                this.loading = true
+                                                this.handleSave(params.row)
+                                            } else {
+                                                this.handleEdit(params.row)
+                                                console.log(params.row,this.loading)
+                                                this.init()
+                                            }
                                         }
                                     }
-                                }, 'View'),
-                                h('Button', {
-                                    props: {
-                                        type: 'error',
-                                        size: 'small'
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.remove(params.index)
-                                        }
-                                    }
-                                }, 'Delete'),
-                                h('Button', {
-                                    props: {
-                                        type: 'primary',
-                                        size: 'small'
-                                    },
-                                    on: {
-                                      click: () => {
-                                        if (params.row.$isEdit) {
-                                          this.handleSave(params.row)
-                                        } else {
-                                          this.handleEdit(params.row)
-                                        }
-                                      }
-                                    }
-                                }, params.row.$isEdit ? '保存' : '编辑')
+                                }, params.row.loading ? '刷新中' : '刷新'),
                             ]);
                         }
                     }
@@ -122,30 +90,22 @@ import axios from 'axios'
         },
         methods:{
             init(){
-              axios({
-                    method : "post",
-                    url : "/dynamic/table"
-                })
+                axios.post('/dynamic/table',{})
                 .then(ret => {
-                    console.log(ret)
+                    this.data1 = ret.data.content
+                    console.log(this.data1,'接口请求')
+                    setTimeout(() =>{
+                        this.loading = false
+                    },3000)
                 })
             },
             handleSave(row) {
-                console.log(row,'保存');
-                this.$set(row,'$isEdit',false)
+                console.log(row,'刷新');
+                this.$set(row,'loading',false)
             },
             handleEdit(row) {
-                console.log(row,'编辑')
-                this.$set(row,'$isEdit',true)
-            },
-            show(index) {
-                this.$Modal.info({
-                    title: 'User Info',
-                    content: `Name：${this.data1[index].name}<br>Age：${this.data1[index].age}<br>Address：${this.data1[index].address}`
-                })
-            },
-            remove(index) {
-                this.data1.splice(index, 1);
+                console.log(row,'刷新中')
+                this.$set(row,'loading',true);
             },
         }
   }

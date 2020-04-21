@@ -98,7 +98,7 @@ export default {
 							this.$Message.success('登录成功!')
 							sessionStorage.setItem('name',valid) // 设置缓存
 							this.$store.commit('increment')
-							console.log(ret.data.code,this.$store.state,valid)
+							// console.log(ret.data.code,this.$store.state,valid)
 						}else {
 							this.$Message.error('表单验证失败!')
 						}

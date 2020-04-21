@@ -11,8 +11,11 @@ import '@/mock'
 
 // 全局方法
 import HeaderMenu from '@/components/HeaderMenu'
+import Head from '@/components/Header'
 Vue.component('HeaderMenu' , HeaderMenu)
+Vue.component('Head' , Head)
 Vue.use(HeaderMenu)
+Vue.use(Head)
 Vue.use(animate)
 Vue.use(iview)
 Vue.use(plugins)

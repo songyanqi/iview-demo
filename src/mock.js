@@ -13,6 +13,7 @@ Mock.mock(
                 content : Random.cparagraph(1 , 3),
                 title : Random.title(1 , 3),
                 "name" : Random.cname(),
+                Address:Random.city(),
             }
         ]
     }

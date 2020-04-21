@@ -1,8 +1,6 @@
 <template>
   <Layout :style="{marginLeft: '200px'}">
-        <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}">
-            <i-button type="info">退出</i-button>
-        </Header>
+        <Head></Head>
         <Content :style="{padding: '0 16px 16px'}">
             <!-- 全局组件 -->
             <header-menu :items ='headerList'></header-menu>
@@ -148,7 +146,7 @@
             /*
                 this.$set(this.data,'key',value) 
                 作用：给data对象新增属性，并触发视图更新
-                注意： 直接给this.data赋值操作，虽然可以新增属性，但是不会触发视图更新
+                注意：直接给this.data赋值操作，虽然可以新增属性，但是不会触发视图更新
                 原因：受 ES5 的限制，Vue.js 不能检测到对象属性的添加或删除。
                 因为 Vue.js 在初始化实例时将属性转为 getter/setter，所以属性必须在 data 对象上才能让 Vue.js 转换它，才能让它是响应的。
             */
