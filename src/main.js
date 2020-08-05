@@ -6,6 +6,7 @@ import iview from 'iview'
 import plugins from './plugins/common'
 import animate from 'animate.css'
 import 'iview/dist/styles/iview.css'
+import * as filters from "./plugins/filters"
 // mockjs  
 import '@/mock'
 

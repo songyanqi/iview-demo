@@ -35,6 +35,11 @@ export default [
                 path :'a',
                 meta:'1-1',
                 component: () => import(/* webpackChunkName: "home" */ '@/views/demo/a'), 
+            },
+            {
+                path :'ts',
+                meta:'1-2',
+                component: () => import(/* webpackChunkName: "home" */ '@/views/demo/tsDemo'), 
             }
         ],
     },
