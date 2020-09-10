@@ -11,9 +11,8 @@
     </Layout>
 </template>
 <script>
-import axios from 'axios'
-
-  export default {
+    import axios from 'axios'
+    export default {
       // 返回数组字符串 转化成 文字
       // 去掉文案中包含的空格
       // 时间戳转换
@@ -23,6 +22,8 @@ import axios from 'axios'
             this.init();
         },
         data() {
+            // 21+3+0.9=24.9
+            // 5+7.24 = 12.24+24.9 = 37.14
             return {
                 loading:false,
                 headerList:[
@@ -108,6 +109,6 @@ import axios from 'axios'
                 this.$set(row,'loading',true);
             },
         }
-  }
+    }
 </script>
 
