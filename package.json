@@ -21,7 +21,7 @@
     "@vue/cli-plugin-babel": "^3.2.0",
     "@vue/cli-plugin-pwa": "^3.2.0",
     "@vue/cli-service": "^3.2.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "express": "^4.16.4",
     "iview": "^3.1.5",
     "less": "^3.9.0",
